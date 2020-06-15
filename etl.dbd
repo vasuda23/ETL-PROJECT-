@@ -1,0 +1,35 @@
+#https://app.quickdatabasediagrams.com/#/d/JAjqI7
+hlcn
+-
+AreaCode string
+St string
+Cnty float64
+Own int64
+NAICS int64
+Year int64
+Qtr string
+AreaType string
+StName string
+Area string
+Ownership string
+Industry string
+AnnualAverageStatusCode string
+AnnualAverageEstablishmentCount int64
+AnnualAverageEmployment int64
+AnnualTotalWages int64
+AnnualAverageWeeklyWage int64
+AnnualAveragePay int64
+EmploymentLocationQuotientRelativetoU.S. float64
+TotalWageLocationQuotientRelativetoU.S. float64
+
+lau
+-
+LAUSCode string
+StateFIPSCode string
+CountyFIPSCode int64
+CountyName/StateAbbreviation string FK - hlcn.Area
+Period string
+LaborForce int64
+Employed int64
+Unemployed int64
+UnemploymentRate(%) float64
