@@ -79,3 +79,28 @@ select "Annual Average Pay" from hlcn
 where "Area" = 'U.S. TOTAL'
 and "Ownership" = 'Total Covered'
 )
+
+update lau set "LAUS Code" = substring("LAUS Code",3,5);
+
+alter table lau
+alter column "LAUS Code" type float8
+using "LAUS Code"::double precision;
+
+delete from hlcn
+where "Area Code" = 'US000';
+
+delete from hlcn
+where "Area Code" like 'C%';
+
+alter table hlcn
+alter column "Area Code" type float8
+using "Area Code"::double precision;
+
+create view final_db as
+select  covid.fips, hlcn."Area", covid."Total Cases",
+		covid."Total Deaths", lau."Unemployed",
+		lau."Unemployment Rate (%)",
+		hlcn."Annual Average Pay",
+		hlcn."Industry", lau."Period" from lau
+join covid on covid.fips=lau."LAUS Code"
+join hlcn on hlcn."Area Code"=lau."LAUS Code";
