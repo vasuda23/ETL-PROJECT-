@@ -1,3 +1,11 @@
+drop table if exists covid;
+
+create table covid ("fips" float8, "Total Cases" int, "Total Deaths" int, "Count" int);
+
+copy covid from 'C://temp/us_counties_final_data.csv' csv header;
+
+select * from covid;
+
 drop table if exists lau;
 
 create table lau (  "LAUS Code" varchar,
