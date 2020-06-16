@@ -38,3 +38,25 @@ create table hlcn ( "Area Code" varchar,
 copy hlcn from 'C:\temp\hlcn-clean.csv' csv header;
 
 select * from hlcn;
+
+create view qcew_avgpay_less as
+select "Area","Annual Average Pay" from hlcn
+where "Ownership" = 'Total Covered'
+and "Area Type" = 'County'
+and "Annual Average Pay" <
+(
+select "Annual Average Pay" from hlcn
+where "Area" = 'U.S. TOTAL'
+and "Ownership" = 'Total Covered'
+)
+
+create view qcew_avgpay_more as
+select "Area","Annual Average Pay" from hlcn
+where "Ownership" = 'Total Covered'
+and "Area Type" = 'County' 
+and "Annual Average Pay" >
+(
+select "Annual Average Pay" from hlcn
+where "Area" = 'U.S. TOTAL'
+and "Ownership" = 'Total Covered'
+)
