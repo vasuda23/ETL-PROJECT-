@@ -39,6 +39,17 @@ copy hlcn from 'C:\temp\hlcn-clean.csv' csv header;
 
 select * from hlcn;
 
+create view lau_unemploy_more
+select "County Name/State Abbreviation", "Employed", "Unemployed", "Unemployment Rate (%)" from lau
+where "Unemployment Rate (%)" >= 3.6
+order by "Unemployment Rate (%)" desc
+
+create view lau_unemploy_less
+select "County Name/State Abbreviation", "Employed", "Unemployed", "Unemployment Rate (%)" from lau
+where "Unemployment Rate (%)" < 3.6
+and "Unemployment Rate (%)" > 0
+order by "Unemployment Rate (%)" desc
+
 create view qcew_avgpay_less as
 select "Area","Annual Average Pay" from hlcn
 where "Ownership" = 'Total Covered'
@@ -53,7 +64,7 @@ and "Ownership" = 'Total Covered'
 create view qcew_avgpay_more as
 select "Area","Annual Average Pay" from hlcn
 where "Ownership" = 'Total Covered'
-and "Area Type" = 'County' 
+and "Area Type" = 'County'
 and "Annual Average Pay" >
 (
 select "Annual Average Pay" from hlcn
